@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import 'uno.css'
 import './app.scss'
 
 const App = createApp({

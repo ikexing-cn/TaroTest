@@ -1,22 +1,22 @@
+import UnoCSS from 'unocss/webpack'
+
 const config = {
   projectName: 'FirstTaroTest',
   date: '2023-4-25',
-  designWidth: 750,
+  designWidth: 375,
   deviceRatio: {
     640: 2.34 / 2,
     750: 1,
     828: 1.81 / 2,
+    375: 2 / 1,
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
   plugins: [],
-  defineConstants: {
-  },
+  defineConstants: {},
   copy: {
-    patterns: [
-    ],
-    options: {
-    },
+    patterns: [],
+    options: {},
   },
   framework: 'vue3',
   compiler: 'webpack5',
@@ -27,9 +27,7 @@ const config = {
     postcss: {
       pxtransform: {
         enable: true,
-        config: {
-
-        },
+        config: {},
       },
       url: {
         enable: true,
@@ -45,6 +43,11 @@ const config = {
         },
       },
     },
+    hot: true,
+    webpackChain(chain) {
+      // https://github.com/unocss/unocss
+      chain.plugin('unocss').use(UnoCSS())
+    },
   },
   h5: {
     publicPath: '/',
@@ -52,8 +55,7 @@ const config = {
     postcss: {
       autoprefixer: {
         enable: true,
-        config: {
-        },
+        config: {},
       },
       cssModules: {
         enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
@@ -63,13 +65,9 @@ const config = {
         },
       },
     },
-  },
-  rn: {
-    appName: 'taroDemo',
-    postcss: {
-      cssModules: {
-        enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
-      },
+    webpackChain(chain) {
+      // https://github.com/unocss/unocss
+      chain.plugin('unocss').use(UnoCSS())
     },
   },
 }
